@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+
+	<select id="selectPost" resultType="postVo">
+		SELECT *
+		FROM post where board_id = #{board_id}
+	</select>
+	
+	<insert id="insertPost" parameterType="postVo">
+		INSERT INTO post
+		VALUES(post_SEQ.nextval, #{board_id}, #{post_title}, #{post_contents}, sysdate, #{post_status}, #{mem_id}, #{p_post_id})
+	</insert>
+	<update id="updatePost" parameterType="postVo">
+		UPDATE board SET board_name= #{board_name}, board_status= #{board_status} where board_id= #{board_id}
+	</update>
+
+
+</mapper>

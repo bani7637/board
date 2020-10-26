@@ -6,6 +6,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="kr.or.ddit.member.model.MemberVO" alias="MemberVo"/>
+		<typeAlias type="kr.or.ddit.board.model.BoardVO" alias="BoardVo"/>
+		<typeAlias type="kr.or.ddit.post.model.postVO" alias="postVo"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -22,6 +24,8 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="kr/or/ddit/db/mapper/member.xml" />
+		<mapper resource="kr/or/ddit/db/mapper/member2.xml" />
+		<mapper resource="kr/or/ddit/db/mapper/board.xml" />
+		<mapper resource="kr/or/ddit/db/mapper/post.xml" />
 	</mappers>
 </configuration>
