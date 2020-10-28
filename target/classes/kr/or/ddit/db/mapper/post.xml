@@ -3,20 +3,87 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="post">
+	<select id="getPost" resultType="postVo" parameterType="int">
+		SELECT *
+		FROM post
+		WHERE post_id = #{post_id}
+	</select>
 
 
 	<select id="selectPost" resultType="postVo">
-		SELECT *
-		FROM post where board_id = #{board_id}
+		select post_id, lpad(' ',(level-1)*4) || post_title as post_title, BOARD_ID, POST_CONTENT,
+		POST_DATE ,POST_STATUS, MEM_ID, P_POST_ID
+		from post
+		where
+		BOARD_ID=#{board_id}
+		start with p_post_id is null
+		connect by prior
+		post_id = p_post_id
+		order SIBLINGS BY post_id desc
+
 	</select>
-	
+
 	<insert id="insertPost" parameterType="postVo">
 		INSERT INTO post
-		VALUES(post_SEQ.nextval, #{board_id}, #{post_title}, #{post_contents}, sysdate, #{post_status}, #{mem_id}, #{p_post_id})
+		VALUES(post_SEQ.nextval, #{board_id}, #{post_title},
+		#{post_content},
+		sysdate, '0', #{mem_id}, null, gu_seq.nextval)
+
+		<selectKey keyProperty="post_id" resultType="int">
+			select post_SEQ.currval from dual
+		</selectKey>
+
 	</insert>
+	
+	<insert id="repostInsert" parameterType="postVo">
+		
+		INSERT INTO post
+		VALUES (post_SEQ.nextval, #{board_id}, #{post_title},
+		#{post_content}, sysdate, '0', #{mem_id}, #{p_post_id},  #{gu})
+
+		<selectKey keyProperty="post_id" resultType="int">
+			select post_SEQ.currval from dual
+		</selectKey>
+
+	</insert>
+
 	<update id="updatePost" parameterType="postVo">
-		UPDATE board SET board_name= #{board_name}, board_status= #{board_status} where board_id= #{board_id}
+		UPDATE post SET
+		post_title=#{post_title}, post_content= #{post_content} where
+		post_id= #{post_id}
 	</update>
+
+	<update id="deletePost" parameterType="postVo">
+		UPDATE post SET
+		post_status='1' where
+		post_id= #{post_id}
+	</update>
+
+
+	<select id="selectPostList" resultType="postVo"
+		parameterType="postVo">
+		
+ 	SELECT *
+		FROM
+		(
+		SELECT
+		ROWNUM rn, a.*
+		FROM 
+		(select * from
+        (select post_id, lpad(' ',(level-1)*4) || post_title as post_title, BOARD_ID, POST_CONTENT,
+		POST_DATE, POST_STATUS, MEM_ID, P_POST_ID, level
+		from post
+        where board_id=#{board_id}
+        start with p_post_id is null
+		CONNECT by prior post_id = p_post_id
+		order SIBLINGS BY gu desc, post_id asc))a)
+		WHERE rn between (#{page}-1) * #{pageSize} + 1 and #{page} * #{pageSize}
+	</select>
+
+	<select id="selectPostTotalcnt" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM post where board_id=#{board_id}
+	</select>
 
 
 </mapper>

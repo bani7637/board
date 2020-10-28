@@ -11,6 +11,8 @@ public class postVO {
 	private String post_status  ;
 	private String mem_id       ;
 	private int p_post_id    ;
+	private int gu;
+	private int level;
 	public int getPost_id() {
 		return post_id;
 	}
@@ -59,11 +61,25 @@ public class postVO {
 	public void setP_post_id(int p_post_id) {
 		this.p_post_id = p_post_id;
 	}
+	public int getGu() {
+		return gu;
+	}
+	public void setGu(int gu) {
+		this.gu = gu;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + board_id;
+		result = prime * result + gu;
+		result = prime * result + level;
 		result = prime * result + ((mem_id == null) ? 0 : mem_id.hashCode());
 		result = prime * result + p_post_id;
 		result = prime * result + ((post_content == null) ? 0 : post_content.hashCode());
@@ -83,6 +99,10 @@ public class postVO {
 			return false;
 		postVO other = (postVO) obj;
 		if (board_id != other.board_id)
+			return false;
+		if (gu != other.gu)
+			return false;
+		if (level != other.level)
 			return false;
 		if (mem_id == null) {
 			if (other.mem_id != null)
@@ -119,10 +139,8 @@ public class postVO {
 	public String toString() {
 		return "postVO [post_id=" + post_id + ", board_id=" + board_id + ", post_title=" + post_title
 				+ ", post_content=" + post_content + ", post_date=" + post_date + ", post_status=" + post_status
-				+ ", mem_id=" + mem_id + ", p_post_id=" + p_post_id + "]";
+				+ ", mem_id=" + mem_id + ", p_post_id=" + p_post_id + ", gu=" + gu + ", level=" + level + "]";
 	}
-	
-	
 	
 	
 }

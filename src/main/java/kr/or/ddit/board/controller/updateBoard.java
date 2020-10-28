@@ -1,6 +1,8 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +48,8 @@ public class updateBoard extends HttpServlet {
 		int res = boardService.updateBoard(boardVO);
 
 		if (res == 1) {
+			List<BoardVO> boardList = boardService.selectBoard();
+			request.getSession().setAttribute("boardList", boardList);
 			response.sendRedirect(request.getContextPath() + "/boardAllList");
 		} else {
 			// 화면요청

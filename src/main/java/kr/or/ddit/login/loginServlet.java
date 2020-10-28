@@ -1,6 +1,8 @@
 package kr.or.ddit.login;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.service.BoardService;
+import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
@@ -22,10 +27,11 @@ public class loginServlet extends HttpServlet {
 	
 	//
 	private MemberServiceI memService;
-	
+	private BoardServiceI boardService;
 	@Override
 	public void init() throws ServletException {	
 		memService = new MemberService();
+		boardService = new BoardService();
 	}
 	
     //longin 화면에서 사용자가 보낸 아이디 비밀번호를 사용하여 로그인 처리   
@@ -44,8 +50,11 @@ public class loginServlet extends HttpServlet {
 		}
 		// db에 등록된 회원이고, 비밀번호가 일치하는 경우 메인페이지 이동
 		else if(memvo.getMem_pass().equals(mem_pass)) {
+			List<BoardVO> boardList = boardService.selectBoard();
 			request.getSession().setAttribute("memvo", memvo);
-			request.getRequestDispatcher("/main.jsp").forward(request, response);			
+			request.getSession().setAttribute("boardList", boardList);
+			request.getRequestDispatcher("/main.jsp").forward(request, response);	
+			
 		}
 		
 		

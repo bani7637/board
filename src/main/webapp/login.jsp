@@ -66,6 +66,7 @@
 	$(function() {
 		// 1. 쿠키값 Y인지 확인
 		if (getCookieValues("REMEMBERME") == "Y") {
+			
 			// 2. 1번 충족시 checked="checked"상태변경
 			$("input:checkbox[id='remember']").prop("checked", true);
 			$("#remember").prop("checked", true);

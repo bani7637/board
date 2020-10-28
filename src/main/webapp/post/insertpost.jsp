@@ -19,7 +19,10 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#summernote').summernote();
-	       
+		$("#regBtn").on("click",function(){
+				$("#frm").submit();
+			});
+		
 	});
 </script>
 <style type="text/css">
@@ -28,21 +31,18 @@ textarea {
 	height: 100px;
 	resize: none;
 }
-
+#dd{
+margin-top:100px; 
+}
 </style>
 </head>
 <body>
-
-
-
-
 
 	<%@ include file="/layout/header.jsp"%>
 	<div class="container-fluid">
 		<div class="row">
 
 			<div class="col-sm-3 col-md-2 sidebar">
-				<%@ include file="/layout/left.jsp"%>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -50,10 +50,23 @@ textarea {
 				<div class="row">
 
 					<div class="col-sm-8 blog-main">
-						<form method="post">
-							<div id="summernote"></div>
+					<div id="dd"></div>
+						<form method="post" action="${cp}/insertPost" id="frm" enctype="multipart/form-data">
+					<label for="post_title" class="col-sm-2 control-label">제목</label>
+							<input style="width: 800px;" type="text" id="post_title" name="post_title"></input><br>
+							<input type="text" id="board_id" name="board_id" hidden="hidden" value="${board_id}"></input>
+							<textarea id="summernote" name="post_content"></textarea>
+							
+						<div>
+						
+							<input type="file" id="realFilename1" name="realFilename1" >첨부파일1
+							<input type="file" id="realFilename2" name="realFilename2" >첨부파일2
+							<input type="file" id="realFilename3" name="realFilename3" >첨부파일3
+							<input type="file" id="realFilename4" name="realFilename4" >첨부파일4
+							<input type="file" id="realFilename5" name="realFilename5" >첨부파일5
+						</div>
+							<button type="button" class="btn btn-default" id="regBtn">등록</button>
 						</form>
-
 
 					</div>
 				</div>

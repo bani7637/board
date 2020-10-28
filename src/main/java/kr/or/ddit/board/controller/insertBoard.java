@@ -1,6 +1,8 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -50,6 +52,8 @@ public class insertBoard extends HttpServlet {
 		boardVO.setBoard_status(board_status);
 		int res = boardService.insertBoard(boardVO);
 		if (res == 1) {
+			List<BoardVO> boardList = boardService.selectBoard();
+			request.getSession().setAttribute("boardList", boardList);
 			response.sendRedirect(request.getContextPath() + "/boardAllList");
 		} else {
 			doGet(request, response);
