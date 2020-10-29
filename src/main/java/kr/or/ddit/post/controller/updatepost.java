@@ -57,10 +57,26 @@ public class updatepost extends HttpServlet {
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		String post_title = request.getParameter("post_title");
 		String post_content= request.getParameter("post_content");
-		logger.debug("tnwjd :{}",post_id);
-		logger.debug("tnwjd :{}",post_title);
-		logger.debug("tnwjd :{}",post_content);
-		
+		if (request.getParameter("delfile_id1")!=null) {
+			int delfileid1= Integer.parseInt(request.getParameter("delfile_id1"));
+			fileService.deleteFile(delfileid1);
+		}
+		if (request.getParameter("delfile_id2")!=null) {
+			int delfileid2= Integer.parseInt(request.getParameter("delfile_id2"));
+			fileService.deleteFile(delfileid2);
+		}
+		if (request.getParameter("delfile_id3")!=null) {
+			int delfileid3= Integer.parseInt(request.getParameter("delfile_id3"));
+			fileService.deleteFile(delfileid3);
+		}
+		if (request.getParameter("delfile_id4")!=null) {
+			int delfileid4= Integer.parseInt(request.getParameter("delfile_id4"));
+			fileService.deleteFile(delfileid4);
+		}
+		if (request.getParameter("delfile_id5")!=null) {
+			int delfileid5= Integer.parseInt(request.getParameter("delfile_id5"));
+			fileService.deleteFile(delfileid5);
+		}
 		postVO postVO = new postVO();
 		postVO.setPost_id(post_id);
 		postVO.setPost_title(post_title);

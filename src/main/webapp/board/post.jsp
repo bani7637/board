@@ -112,7 +112,7 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-								<c:if test="${page ne pages && page ne 0}">
+								<c:if test="${page ne pages && pages ne 0}">
 									<li ><a href="${pageContext.request.contextPath }/selectPost?board_id=${board_id}&page=${page+1}">&#62;</a></li>
 									<li ><a href="${pageContext.request.contextPath }/selectPost?board_id=${board_id}&page=${pages }">&#62;&#62;</a></li>
 								</c:if>

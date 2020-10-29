@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.post.model.postVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -27,26 +28,38 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-<script>
-	$(document).ready(function() {
-		$('#summernote').summernote();
+<script type="text/javascript">
+	var g_count = 1;
+	var d_count = 1;
+	$(document)
+			.ready(
+					function() {
+						$('#summernote').summernote();
 
-		$(".button2").on(
-				"click",
-				function() {
-					var file_id = $(this).attr('name');
-					var post_id = "${postVO.post_id }";
-					location.href = "deletefile?file_id="+ file_id+"&post_id="+post_id;
-				});
-		
-		$("#regBtn").on("click", function() {
-			$("#frm").submit();
-		});
-	});
+						$(".button2")
+								.on(
+										"click",
+										function(e) {
+											e.preventDefault();
+											var file_id1 = $(this).attr('name');
+											var post_id1 = "${postVO.post_id }";
+											var file_id = "<p><input type='text' name='delfile_id"+(d_count++)+"' value='"+file_id1+"' hidden='hidden'/></p> ";
+											var str = "<p><input type='file' name='realFilename"
+													+ (g_count++) + "' /> ";
+											$("#fileDiv").append(str);
+											$("#filedel").append(file_id);
+											$(this).remove();
+
+										});
+
+						$("#regBtn").on("click", function() {
+							$("#frm").submit();
+						});
+					});
 </script>
 <style type="text/css">
-#dd{
-margin-top:100px; 
+#dd {
+	margin-top: 100px;
 }
 </style>
 </head>
@@ -59,7 +72,7 @@ margin-top:100px;
 				<%@ include file="/layout/left.jsp"%>
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<div id="dd"></div>
+				<div id="dd"></div>
 				<form class="form-horizontal" role="form" id="frm"
 					action="${cp}/updatepost" method="post"
 					enctype="multipart/form-data">
@@ -87,9 +100,9 @@ margin-top:100px;
 								name="post_id" value="${postVO.post_id }">
 						</div>
 					</div>
-					
-					
-					
+
+
+
 
 					<div class="form-group" hidden="hidden">
 						<label for="board_id" class="col-sm-2 control-label">게시판
@@ -107,63 +120,71 @@ margin-top:100px;
 								name="post_title" value="${postVO.post_title }">
 						</div>
 					</div>
-					
+
 
 
 					<input type="text" id="board_id" name="board_id" hidden="hidden"
 						value="${board_id}"></input>
-						
+
 					<textarea id="summernote" name="post_content">
 					${postVO.post_content }
 					</textarea>
 
 
 
-					<div>
-					<c:forEach items="${fileList}" var="files">
-						<div>
-							${files.file_realname }<button type="button" class="btn btn-default button2" name="${files.file_id }">삭제</button>
-						</div>
+					<div id="fileDiv">
+						<c:forEach items="${fileList}" varStatus="row" var="files">
+							<p>
+							<div>
+								<button type="button" class="btn btn-default button2"
+									name="${files.file_id }">${files.file_realname }삭제</button>
+							</div>
+							</p>
 						</c:forEach>
 					</div>
+					<div id="filedel">
+						<p></p>
+					</div>
 					<div>
-					<c:if test="${fileListSize eq 0}">
-						<input type="file" id="realFilename1" name="realFilename1">첨부파일1
-							<input type="file" id="realFilename2" name="realFilename2">첨부파일2
-							<input type="file" id="realFilename3" name="realFilename3">첨부파일3
-							<input type="file" id="realFilename4" name="realFilename4">첨부파일4
-							<input type="file" id="realFilename5" name="realFilename5">첨부파일5
-					
-					</c:if>
-					<c:if test="${fileListSize eq 1}">
-						<input type="file" id="realFilename1" name="realFilename1">첨부파일1
-							<input type="file" id="realFilename2" name="realFilename2">첨부파일2
-							<input type="file" id="realFilename3" name="realFilename3">첨부파일3
-							<input type="file" id="realFilename4" name="realFilename4">첨부파일4
-					
-					</c:if>
-					<c:if test="${fileListSize eq 2}">
-						<input type="file" id="realFilename1" name="realFilename1">첨부파일1
-							<input type="file" id="realFilename2" name="realFilename2">첨부파일2
-							<input type="file" id="realFilename3" name="realFilename3">첨부파일3
-					
-					</c:if>
-					<c:if test="${fileListSize eq 3}">
-						<input type="file" id="realFilename1" name="realFilename1">첨부파일1
-							<input type="file" id="realFilename2" name="realFilename2">첨부파일2
-					
-					</c:if>
-					<c:if test="${fileListSize eq 4}">
-						<input type="file" id="realFilename1" name="realFilename1">첨부파일1
-							<input type="file" id="realFilename2" name="realFilename2">첨부파일2
-					
-					</c:if>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="button" class="btn btn-default" id="regBtn">수정하기</button>
+						<c:if test="${fileListSize eq 0}">
+							<input type="file" id="realFilename1" name="realFilename1">
+							<input type="file" id="realFilename2" name="realFilename2">
+							<input type="file" id="realFilename3" name="realFilename3">
+							<input type="file" id="realFilename4" name="realFilename4">
+							<input type="file" id="realFilename5" name="realFilename5">
+
+						</c:if>
+						<c:if test="${fileListSize eq 1}">
+							<input type="file" id="realFilename1" name="realFilename1">
+							<input type="file" id="realFilename2" name="realFilename2">
+							<input type="file" id="realFilename3" name="realFilename3">
+							<input type="file" id="realFilename4" name="realFilename4">
+
+						</c:if>
+						<c:if test="${fileListSize eq 2}">
+							<input type="file" id="realFilename1" name="realFilename1">
+							<input type="file" id="realFilename2" name="realFilename2">
+							<input type="file" id="realFilename3" name="realFilename3">
+
+						</c:if>
+						<c:if test="${fileListSize eq 3}">
+							<input type="file" id="realFilename1" name="realFilename1">
+							<input type="file" id="realFilename2" name="realFilename2">
+
+						</c:if>
+						<c:if test="${fileListSize eq 4}">
+							<input type="file" id="realFilename1" name="realFilename1">
+							<input type="file" id="realFilename2" name="realFilename2">
+
+						</c:if>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="button" class="btn btn-default" id="regBtn">수정하기</button>
+							</div>
 						</div>
 					</div>
-					</div>
+					
+
 				</form>
 
 
