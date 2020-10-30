@@ -31,26 +31,20 @@
 <script type="text/javascript">
 	var g_count = 1;
 	var d_count = 1;
-	$(document)
-			.ready(
-					function() {
-						$('#summernote').summernote();
+	$(document).ready(function() {
+	$('#summernote').summernote();
 
-						$(".button2")
-								.on(
-										"click",
-										function(e) {
-											e.preventDefault();
-											var file_id1 = $(this).attr('name');
-											var post_id1 = "${postVO.post_id }";
-											var file_id = "<p><input type='text' name='delfile_id"+(d_count++)+"' value='"+file_id1+"' hidden='hidden'/></p> ";
-											var str = "<p><input type='file' name='realFilename"
-													+ (g_count++) + "' /> ";
-											$("#fileDiv").append(str);
-											$("#filedel").append(file_id);
-											$(this).remove();
+						$(".button2").on("click",function(e) {
+								e.preventDefault();
+								var file_id1 = $(this).attr('name');
+								var post_id1 = "${postVO.post_id }";
+								var file_id = "<p><input type='text' name='delfile_id"+ (d_count++)+ "' value='"+ file_id1+ "' hidden='hidden'/></p> ";
+								var str = "<p><input type='file' name='realFilename"+ (g_count++) + "' /> ";
+								$("#fileDiv").append(str);
+								$("#filedel").append(file_id);
+								$(this).remove();
 
-										});
+								});
 
 						$("#regBtn").on("click", function() {
 							$("#frm").submit();
@@ -183,7 +177,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 
 				</form>
 
