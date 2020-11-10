@@ -14,7 +14,7 @@ public class MybatisUtil {
 	// static 블럭을 통해 클래스가 로딩이 될때 mybatis 환경을 구성한다.
 	// => sqlSessionFactory 객체를 생성
 	static {
-		String resource = "kr/or/ddit/db/mybatis-config.xml";
+		String resource = "kr/or/ddit/config/db/mybatis-config.xml";
 		InputStream inputStream;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);

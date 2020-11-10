@@ -55,6 +55,8 @@ margin-top:100px;
 					<label for="post_title" class="col-sm-2 control-label">제목</label>
 							<input style="width: 800px;" type="text" id="post_title" name="post_title"></input><br>
 							<input type="text" id="board_id" name="board_id" hidden="hidden" value="${board_id}"></input>
+							<input type="text" class="form-control" hidden="hidden" id="mem_id"
+									name="mem_id" value="${memvo.mem_id }" />
 							<textarea id="summernote" name="post_content"></textarea>
 							
 						<div>

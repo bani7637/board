@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.board.model.BoardVO;
 import kr.or.ddit.board.service.BoardService;
@@ -19,7 +17,6 @@ import kr.or.ddit.board.service.BoardServiceI;
 @WebServlet("/boardList")
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = LoggerFactory.getLogger(BoardListServlet.class);
 	private BoardServiceI boardService;
 
 	

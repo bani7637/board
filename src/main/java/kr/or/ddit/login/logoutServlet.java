@@ -6,11 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
-/**
- * Servlet implementation class logoutServlet
- */
 @WebServlet("/logout")
 public class logoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

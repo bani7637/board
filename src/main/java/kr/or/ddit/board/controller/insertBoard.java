@@ -37,12 +37,7 @@ public class insertBoard extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String board_name = request.getParameter("board_name");
-		String mem_id = null;
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			logger.debug("cookieName : {}, value : {}", cookie.getName(), cookie.getValue());
-			mem_id = cookie.getValue();
-		}
+		String mem_id = request.getParameter("mem_id");
 		String board_status = request.getParameter("board_status");
 		logger.debug("board_s:{},{}",board_status,board_name);
 

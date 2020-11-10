@@ -1,8 +1,6 @@
 package kr.or.ddit.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +16,6 @@ import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
 
-/**
- * Servlet implementation class MemberRegistServlet
- */
 @WebServlet("/memberRegist")
 @MultipartConfig
 public class MemberRegistServlet extends HttpServlet {

@@ -22,7 +22,7 @@ public class postfileDownload extends HttpServlet {
 	public void init() throws ServletException {
 		fileService = new FileupService();
 	}
-	
+	//통합서비스서버 필요한 이유 : 다운로드기능구현시 다른컴퓨터에서 서버구동(db=내컴퓨터)일때 다운불가능 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int file_id = Integer.parseInt(request.getParameter("file_id"));
 		fileVO fileVO = fileService.downfile(file_id);

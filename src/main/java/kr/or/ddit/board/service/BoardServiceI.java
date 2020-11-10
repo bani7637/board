@@ -3,7 +3,6 @@ package kr.or.ddit.board.service;
 import java.util.List;
 
 import kr.or.ddit.board.model.BoardVO;
-import kr.or.ddit.member.model.MemberVO;
 
 
 public interface BoardServiceI {

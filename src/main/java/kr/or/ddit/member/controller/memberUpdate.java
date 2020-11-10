@@ -1,7 +1,6 @@
 package kr.or.ddit.member.controller;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,13 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
-import oracle.net.aso.s;
 
 @WebServlet("/memUpdate")
 @MultipartConfig
@@ -24,7 +20,6 @@ public class memberUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private MemberServiceI memberService;
-	private static final Logger logger = LoggerFactory.getLogger(memberUpdate.class);
 
 	@Override
 	public void init() throws ServletException {

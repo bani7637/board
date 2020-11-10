@@ -45,12 +45,7 @@ public class insertPost extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String post_title = request.getParameter("post_title");
 		String post_content = request.getParameter("post_content");
-		String mem_id = null;
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			logger.debug("cookieName : {}, value : {}", cookie.getName(), cookie.getValue());
-			mem_id = cookie.getValue();
-		}
+		String mem_id = request.getParameter("mem_id");
 		int board_id = Integer.parseInt(request.getParameter("board_id"));
 		postVO postVO = new postVO();
 		postVO.setMem_id(mem_id);

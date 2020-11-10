@@ -56,6 +56,8 @@ margin-top:100px;
 							<input style="width: 800px;" type="text" id="post_title" name="post_title"></input><br>
 							<input type="text" id="board_id" name="board_id" hidden="hidden" value="${board_id}"></input>
 							<input type="text" id="post_id" name="post_id" hidden="hidden" value="${post_id}"></input>
+							<input type="text" class="form-control" hidden="hidden" id="mem_id"
+									name="mem_id" value="${memvo.mem_id }" />
 							<input type="text" id="gu" name="gu" hidden="hidden" value="${gu}"></input>
 							<textarea id="summernote" name="post_content"></textarea>
 							

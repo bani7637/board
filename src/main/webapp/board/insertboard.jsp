@@ -62,6 +62,8 @@
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
+						<input type="text" class="form-control" hidden="hidden" id="mem_id"
+									name="mem_id" value="${memvo.mem_id }" />
 							<button type="button" class="btn btn-default" id="regBtn">게시판 등록</button>
 						</div>
 					</div>

@@ -30,12 +30,7 @@ public class replyinsert extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		String reply_content  = request.getParameter("reply_content");
-		String mem_id = null;
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			logger.debug("cookieName : {}, value : {}", cookie.getName(), cookie.getValue());
-			mem_id = cookie.getValue();
-		}
+		String mem_id = request.getParameter("mem_id");
 		replyVO replyVO = new replyVO();
 		replyVO.setPost_id(post_id);
 		replyVO.setReply_content(reply_content);
